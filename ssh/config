@@ -1,0 +1,9 @@
+Host da-server
+    HostName 10.5.5.2
+    User sysadmin
+    IdentityFile /home/masterman/.ssh/server.id_rsa
+
+Host da-pi
+    HostName 10.5.5.3
+    User dev
+    IdentityFile /home/masterman/.ssh/pi.id_rsa

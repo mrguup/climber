@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ ! -d "$ZSH/themes" ]; then
+    echo "Your \$ZSH path does not contain a valid 'themes' directory."
+    exit 1
+elif [ ! -f "$ZSH/themes/${1}.zsh-theme" ]; then
+    echo "Try one of these:"
+    shopt -s nullglob
+    WIDTH=6; C=1
+    LIST=( $ZSH/themes/* )
+    for theme in ${LIST[@]}; do
+        theme=${theme//\.zsh-theme}
+        theme=${theme//*\/}
+        printf "%-15s" $theme
+        if [ $C -lt $WIDTH ]; then
+            printf "\t"
+            ((C++))
+        else
+            printf "\n"
+            C=1
+        fi
+    done
+    exit 1
+fi
+
+sed -i "s/^ZSH_THEME=.*/ZSH_THEME=\"$1\"/" ~/.zshrc && zsh
+
